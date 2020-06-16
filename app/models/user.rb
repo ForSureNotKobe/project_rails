@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_one :company, inverse_of: :user
 
     attr_accessor   :remember_token, :activation_token, :reset_token
 
@@ -13,6 +14,7 @@ class User < ApplicationRecord
 
     has_secure_password
     validates :password, presence: true, length: { minimum: 5}, allow_nil: true
+
 
 
 

@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   get     '/logout',          to: 'sessions#destroy'
   get     '/signcompany',     to: 'companies#new'
   post     '/signcompany',     to: 'companies#create'
+  get     '/addclient',     to: 'clients#new'
+  post     '/addclient',     to: 'clients#create'
+  get     '/addlesson',     to: 'lessons#new'
+  post     '/addlesson',     to: 'lessons#create'
   resources :users
   resources :companies
+  resources :lessons
+  resources :clients
 end

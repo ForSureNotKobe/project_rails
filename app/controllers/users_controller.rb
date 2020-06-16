@@ -27,6 +27,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.company_id = nil
     if @user.save
       log_in @user
       # @user.send_activation_email

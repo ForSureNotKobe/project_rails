@@ -13,10 +13,17 @@ class CompaniesController < ApplicationController
     @company.user_id = current_user.id
     if @company.save
       flash[:success] = "Company created!"
-      redirect_to @user   
+      current_user.company_id = @company.id
+      current_user.save
+      redirect_to current_user   
     else
       render 'new'
     end
+  end
+
+
+  def edit
+    @company = Company.find(params[:id])
   end
 
   private
