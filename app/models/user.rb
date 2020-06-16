@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
     attr_accessor   :remember_token, :activation_token, :reset_token
 
     before_save     :downcase_email
@@ -12,6 +13,8 @@ class User < ApplicationRecord
 
     has_secure_password
     validates :password, presence: true, length: { minimum: 5}, allow_nil: true
+
+
 
 
     def self.digest(string)

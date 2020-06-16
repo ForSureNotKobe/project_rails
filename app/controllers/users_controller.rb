@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       # @user.send_activation_email
       # flash[:info] = "Please check your email to activate your account."
       flash[:success] = "Account created!"
-      redirect_to @user   
+      redirect_to signcompany_path   
     else
       render 'new'
     end
