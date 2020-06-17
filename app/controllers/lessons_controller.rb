@@ -6,16 +6,17 @@ class LessonsController < ApplicationController
 
     def show
         @lesson = Lesson.find(params[:id])
-        @lesson.company_id = current_user.company_id.id
-        if @lesson.save
-            flash[:success] = "Lesson added!"
-            redirect_to company_path(current_user)   
-          else
-            render 'new'
-          end
     end
 
     def create
+      @lesson = Lesson.new(lesson_params)
+      @lesson.company_id = current_user.company_id
+        if @lesson.save
+            flash[:success] = "Lesson added!"
+            redirect_to company_path(current_user.company_id)   
+          else
+            render 'new'
+          end
     end
 
     def delete
@@ -26,8 +27,8 @@ class LessonsController < ApplicationController
 
     private
 
-  def company_params
-    params.require(:company).permit(:name,
-       :addres, :nip)
+  def lesson_params
+    params.require(:lesson).permit(:name,
+       :note, :date, :price)
   end
 end

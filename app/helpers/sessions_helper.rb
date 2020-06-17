@@ -14,6 +14,10 @@ module SessionsHelper
         !current_user.nil?
     end
 
+    def company_registred?
+        !current_user.company_id.nil?
+    end
+
     def log_out
         session.delete(:user_id)
         @current_user = nil

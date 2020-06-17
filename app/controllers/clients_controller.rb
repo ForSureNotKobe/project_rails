@@ -8,12 +8,17 @@ class ClientsController < ApplicationController
         @client = Client.find(params[:id])
     end
 
+    def index
+      @clients = Company.where("company_id = ?", current_user.company_id)
+                              .paginate(page: params[:page])
+    end
+
     def create
         @client = Client.new(client_params)
-        @client.company_id = current_user.company_id.id
+        @client.company_id = current_user.company_id
         if @client.save
             flash[:success] = "client added!"
-            redirect_to company_path(current_user)   
+            redirect_to company_path(current_user.company_id)   
           else
             render 'new'
           end

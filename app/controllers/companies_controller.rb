@@ -1,6 +1,5 @@
 class CompaniesController < ApplicationController
   def new
-    @user = current_user
     @company = Company.new
   end
 
@@ -10,12 +9,12 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    @company.user_id = current_user.id
+    @company.company_id = current_company.id
     if @company.save
       flash[:success] = "Company created!"
-      current_user.company_id = @company.id
-      current_user.save
-      redirect_to current_user   
+      current_company.company_id = @company.id
+      current_company.save
+      redirect_to current_company   
     else
       render 'new'
     end
@@ -24,6 +23,16 @@ class CompaniesController < ApplicationController
 
   def edit
     @company = Company.find(params[:id])
+  end
+
+  def update 
+    @company = Company.find(params[:id])
+    if @company.update(company_params)
+      flash[:success] = "Profile updated"
+      redirect_to @company
+    else
+      render 'edit'
+    end
   end
 
   private
