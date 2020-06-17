@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
     has_one :company, inverse_of: :user
 
     attr_accessor   :remember_token, :activation_token, :reset_token

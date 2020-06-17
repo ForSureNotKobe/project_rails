@@ -9,12 +9,13 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    @company.company_id = current_company.id
+    @company.user_id = current_user.id
     if @company.save
       flash[:success] = "Company created!"
-      current_company.company_id = @company.id
-      current_company.save
-      redirect_to current_company   
+      current_user.company_id = @company.id
+      current_user.add_role :admin, @company
+      current_user.save
+      redirect_to current_user   
     else
       render 'new'
     end
