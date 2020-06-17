@@ -5,6 +5,8 @@ class CompaniesController < ApplicationController
 
   def show
     @company = Company.find(params[:id])
+    @clients = @company.clients.paginate(page: params[:page])
+    @lessons = @company.lessons.paginate(page: params[:page])
   end
 
   def create

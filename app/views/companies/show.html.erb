@@ -16,11 +16,22 @@
 
     <div class="col-md-8">
         <% if @company.clients.any? %>
-        <h3>Clients (<%= @company.clients.count %>)</h3>
+        <h3>
+            <%= link_to "Clients", clients_path %>
+            (<%= @company.clients.count %>) </h3>
+        <ol class="clients">
+            <%= render @clients %>
+        </ol>
+        <%= will_paginate @clients %>
+
         <% end %>
 
         <% if @company.lessons.any? %>
         <h3>Lessons (<%= @company.lessons.count %>)</h3>
+        <ol class="lessons">
+            <%= render @lessons %>
+        </ol>
+        <%= will_paginate @lessons %>
         <% end %>
 
     </div>
